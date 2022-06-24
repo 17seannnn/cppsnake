@@ -23,11 +23,16 @@ void Curses::Init() {
         throw "Increase your terminal size to play";
     }
 
-    // TODO all stuff with win_width/height
+    score_win_width  = width;
+    score_win_height = 1;
+    screen_win_width  = width;
+    screen_win_height = height - 1;
+    game_win_width  = width - 2;
+    game_win_height = height - 3;
 
-    score_win  = newwin(0, 0, 1, width);
-    screen_win = newwin(1, 0, height-1, width);
-    game_win   = newwin(2, 1, height-3, width-2);
+    score_win  = newwin(score_win_height, score_win_width, 0, 0);
+    screen_win = newwin(screen_win_height, screen_win_width, 1, 0);
+    game_win   = newwin(game_win_height, game_win_width, 2, 1);
 
     keypad(game_win, 1);
 }
