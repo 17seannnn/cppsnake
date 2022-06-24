@@ -9,7 +9,7 @@ void Snake::Add(int x, int y) {
 }
 
 bool Snake::SelfCollision() {
-    return true;
+    return false;
 }
 
 void Snake::Move() {

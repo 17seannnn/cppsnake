@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include <curses.h>
 
 #include "curses.h"
@@ -6,19 +7,18 @@
 #include "game.h"
 
 void Game::Start() {
+    int quit = 0;
     Snake snake(curses.game_win_width/2, curses.game_win_height/2);
     //Apple apple();
 
-    for (;;) {
+    DisplayBorder();
+    while (!quit) {
         DisplayScore();
-        DisplayBorder();
-
         if (snake.SelfCollision())
             break;
         // if collision with apple
             // snake.Add();
         snake.Move();
-
         curses.Refresh();
 
         int ch = wgetch(curses.game_win);
@@ -35,15 +35,22 @@ void Game::Start() {
         case KEY_RIGHT: case 'D': case 'd': case 'L': case 'l':
             snake.SetDirection(1, 0);
             break;
+        case 'Q': case 'q':
+            quit = 1;
+            break;
         default:
             break;
         }
+
+        usleep(50000); // 50 milliseconds
     }
 }
 
 void Game::DisplayScore() const {
     wclear(curses.score_win);
+    wattrset(curses.score_win, A_BOLD);
     mvwprintw(curses.score_win, 0, 0, "Score: %d", score);
+    wattrset(curses.score_win, A_NORMAL);
 }
 
 void Game::DisplayBorder() const {
