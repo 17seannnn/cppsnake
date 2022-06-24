@@ -22,8 +22,6 @@ void Curses::Init() {
         endwin();
         throw "Increase your terminal size to play";
     }
-    width = 4;
-    height = 4;
 
     score_win_width  = width;
     score_win_height = 1;
