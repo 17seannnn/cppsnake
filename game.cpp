@@ -27,6 +27,7 @@ void Game::Start() {
             do {
                 apple.Spawn();
             } while (snake.IsSnake(apple.GetX(), apple.GetY()));
+            score++;
         } else {
             snake.Move();
         }
