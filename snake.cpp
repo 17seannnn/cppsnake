@@ -6,7 +6,6 @@
 
 Snake::~Snake() {
     Tail* temp;
-
     while (first) {
         temp = first;
         first = first->next;
@@ -16,7 +15,6 @@ Snake::~Snake() {
 
 void Snake::Add(int x, int y) {
     Tail* temp = new Tail;
-
     temp->next = 0;
     if (x == -1) {
         last->next = temp;

@@ -35,7 +35,7 @@ void Curses::Init() {
     game_win   = newwin(game_win_height, game_win_width, 2, 1);
 
     keypad(game_win, true);
-    notimeout(game_win, true);
+    wtimeout(game_win, 0);
 }
 
 void Curses::Refresh() {
