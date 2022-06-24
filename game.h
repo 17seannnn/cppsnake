@@ -9,8 +9,9 @@ public:
 
     void Start();
 private:
-    void DisplayBorder() const;
     void DisplayScore() const;
+    static void DisplayBorder();
+    static void DisplayMsg(const char* msg);
 };
 
 #endif
