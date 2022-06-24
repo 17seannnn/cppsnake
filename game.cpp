@@ -3,6 +3,7 @@
 
 #include "curses.h"
 #include "snake.h"
+#include "apple.h"
 
 #include "game.h"
 
