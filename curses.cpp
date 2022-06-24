@@ -23,7 +23,18 @@ void Curses::Init() {
         throw "Increase your terminal size to play";
     }
 
+    // TODO all stuff with win_width/height
+
     score_win  = newwin(0, 0, 1, width);
     screen_win = newwin(1, 0, height-1, width);
     game_win   = newwin(2, 1, height-3, width-2);
+
+    keypad(game_win, 1);
+}
+
+void Curses::Refresh() {
+    wnoutrefresh(score_win);
+    wnoutrefresh(screen_win);
+    wnoutrefresh(game_win);
+    doupdate();
 }

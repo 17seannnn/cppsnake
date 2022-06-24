@@ -1,15 +1,16 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "snake.h"
-
 class Game {
-    Snake snake;
+    int score;
 public:
-    Game() {}
+    Game() : score(1) {}
     ~Game() {}
 
     void Start();
+private:
+    void DisplayBorder() const;
+    void DisplayScore() const;
 };
 
 #endif
