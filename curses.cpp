@@ -1,6 +1,6 @@
 #include <curses.h>
 
-#include "common.h"
+#include "curses.h"
 
 static const int min_screen_width = 5;
 static const int min_screen_height = 5;

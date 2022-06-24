@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "common.h"
+#include "curses.h"
 #include "game.h"
 
 Curses curses;
