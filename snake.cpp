@@ -35,6 +35,10 @@ void Snake::SetDirection(int n_dx, int n_dy) {
 }
 
 bool Snake::SelfCollision() const {
+    int coll_x = first->x + dx, coll_y = first->y + dy;
+    for (Tail* temp = first->next; temp; temp = temp->next)
+        if (temp->x == coll_x && temp->y == coll_y)
+            return true;
     return false;
 }
 
