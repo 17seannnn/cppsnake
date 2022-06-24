@@ -2,6 +2,7 @@
 #define APPLE_H
 
 #include <curses.h>
+#include <stdlib.h>
 
 #include "curses.h"
 
@@ -13,10 +14,14 @@ public:
 
     int GetX() const { return x; }
     int GetY() const { return y; }
-    void Spawn();
+    void Spawn() {
+        x = rand() % curses.game_win_width;
+        y = rand() % curses.game_win_height;
+        Show();
+    }
 private:
-    void Show() { mvwaddch(curses.game_win, y, x, '@'); }
-    void Hide() { mvwaddch(curses.game_win, y, x, ' '); }
+    void Show() const { mvwaddch(curses.game_win, y, x, '@'); }
+    // Apple doesn't need to hide itself, because snake will cover it
 };
 
 #endif
