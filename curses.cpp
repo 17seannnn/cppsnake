@@ -2,8 +2,8 @@
 
 #include "curses.h"
 
-static const int min_screen_width  = 5;
-static const int min_screen_height = 6;
+static const int min_screen_width  = 32;
+static const int min_screen_height = 16;
 
 void Curses::Init() {
     initscr();
@@ -22,6 +22,8 @@ void Curses::Init() {
         endwin();
         throw "Increase your terminal size to play";
     }
+    width = 4;
+    height = 4;
 
     score_win_width  = width;
     score_win_height = 1;

@@ -29,12 +29,12 @@ void Game::Start() {
         if (snake.CheckCollision(apple.GetX(), apple.GetY())) {
             snake.Add();
             snake.Move();
+            score++;
             if (score == max_score)
                 break;
             do {
                 apple.Spawn();
             } while (snake.IsSnake(apple.GetX(), apple.GetY()));
-            score++;
         } else {
             snake.Move();
         }
@@ -101,4 +101,9 @@ void Game::DisplayMsg(const char* msg) {
             waddch(curses.game_win, ' ' | A_REVERSE);
     }
     mvwprintw(curses.game_win, msg_y, msg_x, "%s", msg);
+
+    // TODO DEBUG
+    FILE* f = fopen("log", "w");
+    fprintf(f, "%s\n", msg);
+    fclose(f);
 }

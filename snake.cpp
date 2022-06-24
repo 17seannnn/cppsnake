@@ -4,6 +4,18 @@
 
 #include "snake.h"
 
+static void check_coords(int& x, int& y) {
+    if (x < 0)
+        x = curses.game_win_width-1;
+    else if (x >= curses.game_win_width)
+        x = 0;
+
+    if (y < 0)
+        y = curses.game_win_height-1;
+    else if (y >= curses.game_win_height)
+        y = 0;
+}
+
 Snake::~Snake() {
     Tail* temp;
     while (first) {
@@ -36,10 +48,18 @@ void Snake::SetDirection(int n_dx, int n_dy) {
 
 bool Snake::SelfCollision() const {
     int coll_x = first->x + dx, coll_y = first->y + dy;
+    check_coords(coll_x, coll_y);
+
     for (Tail* temp = first->next; temp; temp = temp->next)
         if (temp->x == coll_x && temp->y == coll_y)
             return true;
     return false;
+}
+
+bool Snake::CheckCollision(int x, int y) const {
+    int coll_x = first->x + dx, coll_y = first->y + dy;
+    check_coords(coll_x, coll_y);
+    return x == coll_x && y == coll_y;
 }
 
 void Snake::Move() {
@@ -47,16 +67,8 @@ void Snake::Move() {
 
     int last_x = first->x, last_y = first->y;
     first->x += dx;
-    if (first->x < 0)
-        first->x = curses.game_win_width-1;
-    else if (first->x >= curses.game_win_width)
-        first->x = 0;
-
     first->y += dy;
-    if (first->y < 0)
-        first->y = curses.game_win_height-1;
-    else if (first->y >= curses.game_win_height)
-        first->y = 0;
+    check_coords(first->x, first->y);
 
     int save_last_x, save_last_y;
     for (Tail* temp = first->next; temp; temp = temp->next) {
