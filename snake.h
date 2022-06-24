@@ -17,7 +17,10 @@ public:
     void Add(int x = -1, int y = -1); // To add tail just snake.Add(), TODO for first self add
     void SetDirection(int n_dx, int n_dy);
     bool SelfCollision() const; // True on self collision
+    bool CheckCollision(int x, int y) const
+        { return x == first->x + dx && y == first->y + dy; }
     void Move();
+    bool IsSnake(int x, int y) const;
 private:
     void Show() const;
     void Hide() const;

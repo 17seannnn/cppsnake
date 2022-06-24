@@ -76,3 +76,10 @@ void Snake::Hide() const {
     for (Tail* temp = first; temp; temp = temp->next)
         mvwaddch(curses.game_win, temp->y, temp->x, ' ');
 }
+
+bool Snake::IsSnake(int x, int y) const {
+    for (Tail* temp = first; temp; temp = temp->next)
+        if (temp->x == x && temp->y == y)
+            return true;
+    return false;
+}
