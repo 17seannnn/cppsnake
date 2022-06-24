@@ -2,3 +2,5 @@ snake
 deps.mk
 *o
 *~
+*.swp
+TODO
