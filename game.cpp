@@ -9,16 +9,26 @@
 void Game::Start() {
     int quit = 0;
     Snake snake(curses.game_win_width/2, curses.game_win_height/2);
-    //Apple apple();
+    Apple apple;
 
     DisplayBorder();
+    do {
+        apple.Spawn();
+    } while (snake.IsSnake(apple.GetX(), apple.GetY()));
+
     while (!quit) {
         DisplayScore();
         if (snake.SelfCollision())
             break;
-        // if collision with apple
-            // snake.Add();
-        snake.Move();
+        if (snake.CheckCollision(apple.GetX(), apple.GetY())) {
+            snake.Add();
+            snake.Move();
+            do {
+                apple.Spawn();
+            } while (snake.IsSnake(apple.GetX(), apple.GetY()));
+        } else {
+            snake.Move();
+        }
         curses.Refresh();
 
         int ch = wgetch(curses.game_win);
