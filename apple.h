@@ -7,9 +7,10 @@
 #include "curses.h"
 
 class Apple {
+    int ch;
     int x, y;
 public:
-    Apple() : x(-1), y(-1) {}
+    Apple() : ch(' ' | COLOR_PAIR(curses.apple_pair)) {}
     ~Apple() {}
 
     int GetX() const;
@@ -35,7 +36,7 @@ inline void Apple::Spawn() {
 }
 
 inline void Apple::Show() const {
-    mvwaddch(curses.game_win, y, x, ' ' | COLOR_PAIR(curses.apple_pair));
+    mvwaddch(curses.game_win, y, x, ch);
 }
 
 #endif

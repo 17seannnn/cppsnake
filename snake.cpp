@@ -16,7 +16,7 @@ static void check_coords(int& x, int& y) {
         y = 0;
 }
 
-Snake::Snake(int first_x, int first_y) : dx(0), dy(0) {
+Snake::Snake(int first_x, int first_y) : ch(' ' | COLOR_PAIR(curses.snake_pair)), dx(0), dy(0) {
     first = new Tail;
     first->x = first->x;
     first->y = first->y;

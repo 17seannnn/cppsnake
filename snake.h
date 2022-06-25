@@ -7,6 +7,7 @@ class Snake {
         struct Tail* next;
     };
 
+    int ch;
     int dx, dy;
     Tail *first, *last;
 public:
@@ -25,7 +26,7 @@ private:
 };
 
 inline void Snake::Show() const {
-    mvwaddch(curses.game_win, first->y, first->x, ' ' | COLOR_PAIR(curses.snake_pair));
+    mvwaddch(curses.game_win, first->y, first->x, ch);
 }
 
 inline void Snake::Hide() const {
