@@ -36,6 +36,11 @@ void Curses::Init() {
 
     keypad(game_win, true);
     wtimeout(game_win, 0);
+
+    init_pair(snake_pair, -1, COLOR_GREEN);
+    init_pair(apple_pair, -1, COLOR_RED);
+    init_pair(msg_pair, -1, COLOR_BLUE);
+    init_pair(score_pair, COLOR_MAGENTA, -1);
 }
 
 void Curses::Refresh() {
