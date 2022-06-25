@@ -6,6 +6,7 @@ static const int min_screen_width  = 32;
 static const int min_screen_height = 16;
 
 void Curses::Init() {
+    // Basics
     initscr();
     if (has_colors()) {
         use_default_colors();
@@ -16,6 +17,7 @@ void Curses::Init() {
     curs_set(0);
     clear();
 
+    // Windows
     int width, height;
     getmaxyx(stdscr, height, width);
     if (width < min_screen_width || height < min_screen_height) {
@@ -37,10 +39,11 @@ void Curses::Init() {
     keypad(game_win, true);
     wtimeout(game_win, 0);
 
+    // Colors
     init_pair(snake_pair, -1, COLOR_GREEN);
     init_pair(apple_pair, -1, COLOR_RED);
     init_pair(msg_pair, -1, COLOR_BLUE);
-    init_pair(score_pair, COLOR_YELLOW, -1);
+    init_pair(score_pair, -1, COLOR_CYAN);
 }
 
 void Curses::Refresh() {

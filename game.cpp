@@ -70,9 +70,15 @@ void Game::Start() {
 }
 
 void Game::DisplayScore() const {
+    char str[80];
+
     wclear(curses.score_win);
     wattrset(curses.score_win, A_BOLD | COLOR_PAIR(curses.score_pair));
-    mvwprintw(curses.score_win, 0, 0, "Score: %d", score);
+
+    snprintf(str, 80, "Score: %d", score);
+    mvwprintw(curses.score_win, 0, (curses.score_win_width - strlen(str))/2,
+              "%s", str);
+
     wattrset(curses.score_win, A_NORMAL);
 }
 
