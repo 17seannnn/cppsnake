@@ -25,4 +25,12 @@ private:
     void Hide() const;
 };
 
+inline void Snake::Show() const {
+    mvwaddch(curses.game_win, first->y, first->x, ' ' | COLOR_PAIR(curses.snake_pair));
+}
+
+inline void Snake::Hide() const {
+    mvwaddch(curses.game_win, last->y, last->x, ' ');
+}
+
 #endif

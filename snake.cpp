@@ -77,14 +77,6 @@ void Snake::Move() {
     Show();
 }
 
-void Snake::Show() const {
-    mvwaddch(curses.game_win, first->y, first->x, ' ' | COLOR_PAIR(curses.snake_pair));
-}
-
-void Snake::Hide() const {
-    mvwaddch(curses.game_win, last->y, last->x, ' ');
-}
-
 bool Snake::IsSnake(int x, int y) const {
     for (Tail* temp = last; temp; temp = temp->next)
         if (temp->x == x && temp->y == y)
