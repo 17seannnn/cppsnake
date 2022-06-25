@@ -40,7 +40,7 @@ void Curses::Init() {
     init_pair(snake_pair, -1, COLOR_GREEN);
     init_pair(apple_pair, -1, COLOR_RED);
     init_pair(msg_pair, -1, COLOR_BLUE);
-    init_pair(score_pair, COLOR_MAGENTA, -1);
+    init_pair(score_pair, COLOR_YELLOW, -1);
 }
 
 void Curses::Refresh() {

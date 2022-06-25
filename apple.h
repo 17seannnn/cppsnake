@@ -20,7 +20,7 @@ public:
         Show();
     }
 private:
-    void Show() const { mvwaddch(curses.game_win, y, x, '@'); }
+    void Show() const { mvwaddch(curses.game_win, y, x, ' ' | COLOR_PAIR(curses.apple_pair)); }
     // Apple doesn't need to hide itself, because snake will cover it
 };
 
