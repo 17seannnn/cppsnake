@@ -7,7 +7,7 @@ public:
     Game() : score(1) {}
     ~Game() {}
 
-    void Start();
+    bool Start(); // True on play again
 private:
     void DisplayScore() const;
     static void DisplayBorder();

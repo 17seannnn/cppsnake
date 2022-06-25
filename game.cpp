@@ -10,8 +10,10 @@
 
 const char msg_win[] = "You won!";
 const char msg_defeat[] = "You lose...";
+const char msg_play_again[] = "Play again? [y/n/q]";
 
-void Game::Start() {
+bool Game::Start() {
+    int ch;
     int max_score = curses.game_win_width * curses.game_win_height;
     int quit = 0;
     Snake snake(curses.game_win_width/2, curses.game_win_height/2);
@@ -40,7 +42,7 @@ void Game::Start() {
         }
         curses.Refresh();
 
-        int ch = wgetch(curses.game_win);
+        ch = wgetch(curses.game_win);
         switch (ch) {
         case KEY_UP:    case 'W': case 'w': case 'K': case 'k':
             snake.SetDirection(0, -1);
@@ -66,7 +68,12 @@ void Game::Start() {
 
     DisplayMsg(score == max_score ? "You win!" : "You lose...");
     curses.Refresh();
-    sleep(3);
+    do {
+        ch = wgetch(curses.game_win);
+    } while (ch != 'Y' && ch != 'y' &&
+             ch != 'N' && ch != 'n' &&
+             ch != 'Q' && ch != 'q');
+    return ch == 'Y' || ch == 'y';
 }
 
 void Game::DisplayScore() const {
@@ -102,11 +109,16 @@ void Game::DisplayMsg(const char* msg) {
     int msg_x = (curses.game_win_width - len)/2, msg_y = curses.game_win_height/2;
 
     wattrset(curses.game_win, A_BOLD | A_BLINK | COLOR_PAIR(curses.msg_pair));
-    for (int y = msg_y - 3; y <= msg_y + 3; y++) {
+    for (int y = msg_y - 3; y <= msg_y + 4; y++) {
         wmove(curses.game_win, y, msg_x - 5);
         for (int x = msg_x - 5; x <= msg_x + len + 4; x++)
             waddch(curses.game_win, ' ');
     }
     mvwprintw(curses.game_win, msg_y, msg_x, "%s", msg);
+
+    msg_x = (curses.game_win_width - strlen(msg_play_again))/2;
+    msg_y = curses.game_win_height/2;
+    wattrset(curses.game_win, A_BOLD | COLOR_PAIR(curses.msg_pair));
+    mvwprintw(curses.game_win, msg_y+2, msg_x, "%s", msg_play_again);
     wattrset(curses.game_win, A_NORMAL);
 }

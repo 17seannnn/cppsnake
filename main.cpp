@@ -17,8 +17,8 @@ int main() {
         init_program();
         for (;;) {
             Game game;
-            game.Start();
-            break;
+            if (!game.Start())
+                break;
         }
         return 0;
     } catch (const char* s) {
