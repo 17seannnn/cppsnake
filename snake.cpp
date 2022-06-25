@@ -78,13 +78,11 @@ void Snake::Move() {
 }
 
 void Snake::Show() const {
-    for (Tail* temp = last; temp; temp = temp->next)
-        mvwaddch(curses.game_win, temp->y, temp->x, ' ' | COLOR_PAIR(curses.snake_pair));
+    mvwaddch(curses.game_win, first->y, first->x, ' ' | COLOR_PAIR(curses.snake_pair));
 }
 
 void Snake::Hide() const {
-    for (Tail* temp = last; temp; temp = temp->next)
-        mvwaddch(curses.game_win, temp->y, temp->x, ' ');
+    mvwaddch(curses.game_win, last->y, last->x, ' ');
 }
 
 bool Snake::IsSnake(int x, int y) const {
