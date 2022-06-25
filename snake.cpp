@@ -16,6 +16,13 @@ static void check_coords(int& x, int& y) {
         y = 0;
 }
 
+Snake::Snake(int first_x, int first_y) : dx(0), dy(0) {
+    first = new Tail;
+    first->x = first->x;
+    first->y = first->y;
+    last = first;
+}
+
 Snake::~Snake() {
     Tail* temp;
     while (last) {
@@ -25,18 +32,10 @@ Snake::~Snake() {
     }
 }
 
-void Snake::Add(int x, int y) {
+void Snake::Add() {
     Tail* temp = new Tail;
-    if (x == -1) {
-        temp->next = last;
-        last = temp;
-    } else {
-        temp->x = x;
-        temp->y = y;
-        temp->next = 0;
-        first = temp;
-        last = temp;
-    }
+    temp->next = last;
+    last = temp;
 }
 
 void Snake::SetDirection(int n_dx, int n_dy) {
