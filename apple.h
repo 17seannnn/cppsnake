@@ -12,16 +12,30 @@ public:
     Apple() : x(-1), y(-1) {}
     ~Apple() {}
 
-    int GetX() const { return x; }
-    int GetY() const { return y; }
-    void Spawn() {
-        x = rand() % curses.game_win_width;
-        y = rand() % curses.game_win_height;
-        Show();
-    }
+    int GetX() const;
+    int GetY() const;
+    void Spawn();
 private:
-    void Show() const { mvwaddch(curses.game_win, y, x, ' ' | COLOR_PAIR(curses.apple_pair)); }
+    void Show() const;
     // Apple doesn't need to hide itself, because snake will cover it
 };
+
+int Apple::GetX() const {
+    return x;
+}
+
+int Apple::GetY() const {
+    return y;
+}
+
+inline void Apple::Spawn() {
+    x = rand() % curses.game_win_width;
+    y = rand() % curses.game_win_height;
+    Show();
+}
+
+inline void Apple::Show() const {
+    mvwaddch(curses.game_win, y, x, ' ' | COLOR_PAIR(curses.apple_pair));
+}
 
 #endif
