@@ -5,6 +5,13 @@
 static const int min_screen_width  = 32;
 static const int min_screen_height = 16;
 
+Curses::~Curses() {
+    delwin(score_win);
+    delwin(screen_win);
+    delwin(game_win);
+    endwin();
+}
+
 void Curses::Init() {
     // Basics
     initscr();

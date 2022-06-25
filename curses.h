@@ -20,8 +20,7 @@ struct Curses {
     WINDOW* game_win;   // Game without borders
 
     Curses() {}
-    ~Curses()
-        { delwin(score_win); delwin(screen_win); delwin(game_win); endwin(); };
+    ~Curses();
 
     void Init();
     void Refresh();
