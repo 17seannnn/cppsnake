@@ -18,22 +18,22 @@ static void check_coords(int& x, int& y) {
 
 Snake::~Snake() {
     Tail* temp;
-    while (first) {
-        temp = first;
-        first = first->next;
+    while (last) {
+        temp = last;
+        last = last->next;
         delete temp;
     }
 }
 
 void Snake::Add(int x, int y) {
     Tail* temp = new Tail;
-    temp->next = 0;
     if (x == -1) {
-        last->next = temp;
+        temp->next = last;
         last = temp;
     } else {
         temp->x = x;
         temp->y = y;
+        temp->next = 0;
         first = temp;
         last = temp;
     }
@@ -50,7 +50,7 @@ bool Snake::SelfCollision() const {
     int coll_x = first->x + dx, coll_y = first->y + dy;
     check_coords(coll_x, coll_y);
 
-    for (Tail* temp = first->next; temp; temp = temp->next)
+    for (Tail* temp = last; temp != first; temp = temp->next)
         if (temp->x == coll_x && temp->y == coll_y)
             return true;
     return false;
@@ -65,36 +65,30 @@ bool Snake::CheckCollision(int x, int y) const {
 void Snake::Move() {
     Hide();
 
-    int last_x = first->x, last_y = first->y;
+    for (Tail* temp = last; temp->next; temp = temp->next) {
+        temp->x = temp->next->x;
+        temp->y = temp->next->y;
+    }
+
     first->x += dx;
     first->y += dy;
     check_coords(first->x, first->y);
-
-    int save_last_x, save_last_y;
-    for (Tail* temp = first->next; temp; temp = temp->next) {
-        save_last_x = temp->x;
-        save_last_y = temp->y;
-        temp->x = last_x;
-        temp->y = last_y;
-        last_x = save_last_x;
-        last_y = save_last_y;
-    }
 
     Show();
 }
 
 void Snake::Show() const {
-    for (Tail* temp = first; temp; temp = temp->next)
+    for (Tail* temp = last; temp; temp = temp->next)
         mvwaddch(curses.game_win, temp->y, temp->x, ' ' | COLOR_PAIR(curses.snake_pair));
 }
 
 void Snake::Hide() const {
-    for (Tail* temp = first; temp; temp = temp->next)
+    for (Tail* temp = last; temp; temp = temp->next)
         mvwaddch(curses.game_win, temp->y, temp->x, ' ');
 }
 
 bool Snake::IsSnake(int x, int y) const {
-    for (Tail* temp = first; temp; temp = temp->next)
+    for (Tail* temp = last; temp; temp = temp->next)
         if (temp->x == x && temp->y == y)
             return true;
     return false;
