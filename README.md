@@ -19,14 +19,14 @@ cppsnake
 ### Build
 
 ```bash
-    git clone https://github.com/17seannnn/cppsnake
-    cd cppsnake/src
-    make
-    ./snake
+git clone https://github.com/17seannnn/cppsnake
+cd cppsnake/src
+make
+./snake
 ```
 
 ### Dependencies
 
 - g++ or another C++ compiler
 - make
-- ncurses library (usualy it's already installed)
+- ncurses library (usually it's already installed)
