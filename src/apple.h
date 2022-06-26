@@ -21,11 +21,11 @@ private:
     // Apple doesn't need to hide itself, because snake will cover it
 };
 
-int Apple::GetX() const {
+inline int Apple::GetX() const {
     return x;
 }
 
-int Apple::GetY() const {
+inline int Apple::GetY() const {
     return y;
 }
 
