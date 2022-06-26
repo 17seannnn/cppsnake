@@ -20,18 +20,19 @@ bool Game::Start() {
     Apple apple;
 
     DisplayBorder();
+    DisplayScore();
     do {
         apple.Spawn();
     } while (snake.IsSnake(apple.GetX(), apple.GetY()));
 
     while (!quit) {
-        DisplayScore();
         if (snake.SelfCollision())
             break;
         if (snake.CheckCollision(apple.GetX(), apple.GetY())) {
             snake.Add();
             snake.Move();
             score++;
+            DisplayScore();
             if (score == max_score)
                 break;
             do {
