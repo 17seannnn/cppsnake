@@ -15,7 +15,6 @@ const char msg_play_again[] = "Play again? [y/n/q]";
 bool Game::Start() {
     int ch;
     int max_score = curses.game_win_width * curses.game_win_height;
-    int quit = 0;
     Snake snake(curses.game_win_width/2, curses.game_win_height/2);
     Apple apple;
 
@@ -25,6 +24,7 @@ bool Game::Start() {
         apple.Spawn();
     } while (snake.IsSnake(apple.GetX(), apple.GetY()));
 
+    bool quit = false;
     while (!quit) {
         if (snake.SelfCollision())
             break;
@@ -58,13 +58,13 @@ bool Game::Start() {
             snake.SetDirection(1, 0);
             break;
         case 'Q': case 'q':
-            quit = 1;
+            quit = true;
             break;
         default:
             break;
         }
 
-        usleep(50000); // 50 milliseconds
+        usleep(50000); // 20 fps
     }
 
     DisplayMsg(score == max_score ? "You win!" : "You lose...");
